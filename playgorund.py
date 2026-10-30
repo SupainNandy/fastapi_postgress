@@ -6,6 +6,7 @@ import os
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, text
 
+#step 1: Load environment variables from .env file
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
 
@@ -14,6 +15,8 @@ if not DATABASE_URL:
 
 print("Connecting to:", DATABASE_URL)
 
+
+#step 2: Create a SQLAlchemy engine -> the road to connect to the database
 engine = create_engine(DATABASE_URL)
 
 with engine.connect() as connection:
