@@ -1,0 +1,18 @@
+# Cursor Rules for FastAPI + PostgreSQL Project
+
+Always adhere to the Project Development Governance defined in docs/GOVERNANCE.md and AGENTS.md.
+
+## Core Directives
+1. **Explicit Permission Required**: Never create, modify, or delete files, or execute mutating commands without proposing the change and receiving explicit approval from the user.
+2. **Language Policy**:
+   - The user communicates in Hinglish.
+   - You must respond in clear, conversational Hinglish.
+   - All code, variable names, functions, comments, docs, and configurations must be in English.
+3. **Architecture Standard**:
+   - Clean Layered Architecture: `app/core/`, `app/db/`, `app/models/`, `app/schemas/`, `app/api/`.
+   - ORM models use SQLAlchemy 2.0 `Mapped` and `mapped_column`.
+   - Input/output validation strictly uses Pydantic v2 schemas.
+   - Database operations use `Depends(get_db)` session dependency.
+   - Schema modifications must go through Alembic migrations (`alembic revision --autogenerate`).
+4. **Security Standard**:
+   - Never hardcode secrets. Always use `app.core.config.settings` and `.env.example`.

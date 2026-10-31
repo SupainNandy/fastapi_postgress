@@ -1,0 +1,17 @@
+{
+  "database-guard": {
+    "enabled": true,
+    "PreToolUse": [
+      {
+        "matcher": "run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./.agents/scripts/db_guard.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
