@@ -19,6 +19,7 @@
 - [x] Student Database Model (`Student`), Pydantic validation schemas, and REST endpoints (`/api/v1/students`).
 - [x] Database migration applied for `students` table (revision `61f78504b179`).
 - [x] Two-layer Database Safety Guard: Lifecycle PreToolUse hook (`.agents/hooks.json`) and SQLAlchemy runtime DDL interception (`app/db/guard.py`).
+- [x] Student Library Management System: `Book` and `BookIssue` models with relationships, multi-book borrowing (`/api/v1/library/borrow`), return with automated ₹50/day fine calculation (`/api/v1/library/return/{issue_id}`), and migration `11c37dff5054`.
 
 ## Upcoming Milestones
 - [ ] Add User model, secure password hashing (Argon2 / Bcrypt), and JWT Authentication.

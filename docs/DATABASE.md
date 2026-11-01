@@ -64,6 +64,29 @@ sequenceDiagram
 | `created_at` | `TIMESTAMP WITH TIME ZONE` | Non-nullable, Server Default: `now()` | Timestamp of enrollment |
 | `updated_at` | `TIMESTAMP WITH TIME ZONE` | Non-nullable, Server Default: `now()` | Timestamp of last modification |
 
+### `books` Table
+| Column | Type | Constraints | Description |
+| :--- | :--- | :--- | :--- |
+| `id` | `INTEGER` | Primary Key, Indexed | Unique book identifier |
+| `title` | `VARCHAR(200)` | Non-nullable | Title of the book |
+| `author` | `VARCHAR(100)` | Non-nullable | Author name |
+| `isbn` | `VARCHAR(20)` | Unique, Nullable | ISBN code |
+| `total_copies` | `INTEGER` | Non-nullable, Default: 1 | Total inventory copies |
+| `available_copies` | `INTEGER` | Non-nullable, Default: 1 | Currently unborrowed copies |
+| `created_at` | `TIMESTAMP WITH TIME ZONE` | Non-nullable, Server Default: `now()` | Added to inventory timestamp |
+
+### `book_issues` Table (Many-to-Many Borrowing & Fines)
+| Column | Type | Constraints | Description |
+| :--- | :--- | :--- | :--- |
+| `id` | `INTEGER` | Primary Key, Indexed | Unique borrow record identifier |
+| `student_id` | `INTEGER` | Foreign Key (`students.id`), Indexed | Borrower student ID |
+| `book_id` | `INTEGER` | Foreign Key (`books.id`), Indexed | Borrowed book ID |
+| `issued_at` | `TIMESTAMP WITH TIME ZONE` | Non-nullable, Server Default: `now()` | Checkout timestamp |
+| `due_date` | `TIMESTAMP WITH TIME ZONE` | Non-nullable | Deadline to return |
+| `returned_at` | `TIMESTAMP WITH TIME ZONE` | Nullable | Check-in timestamp |
+| `fine_amount` | `INTEGER` | Non-nullable, Default: 0 | Calculated late fee (₹50/day overdue) |
+| `status` | `VARCHAR(20)` | Non-nullable, Default: `BORROWED` | `BORROWED` or `RETURNED` |
+
 ## Database Safety Guard & Destruction Prevention
 1. **Agent Lifecycle PreToolUse Hook (`.agents/hooks.json` & `.agents/scripts/db_guard.py`)**:
    Intercepts agent tool executions before running commands. Blocks commands matching destructive patterns (`DROP TABLE`, `DROP DATABASE`, `TRUNCATE`, `alembic downgrade`, `docker volume rm`).

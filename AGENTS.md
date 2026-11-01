@@ -69,7 +69,7 @@ FastApi_Postgress/
 * **Database Engine**: PostgreSQL 16 container running via Docker Compose (`postgres_db`).
 * **Connection String**: `postgresql+psycopg://postgres:FastApi@123@localhost:5432/fastapi_db`
 * **Driver**: Psycopg 3 (`psycopg`, `psycopg-binary`).
-* **Alembic State**: Migrations applied (`d7fc2046d608_create_todos_table`, `61f78504b179_create_students_table`). Active tables: `alembic_version`, `todos`, `students`.
+* **Alembic State**: Migrations applied (`d7fc2046d608_create_todos_table`, `61f78504b179_create_students_table`, `11c37dff5054_create_books_and_book_issues_tables`). Active tables: `alembic_version`, `todos`, `students`, `books`, `book_issues`.
 * **Database Guard**: Active hooks in `.agents/hooks.json` and `app/db/guard.py` blocking unauthorized `DROP`, `TRUNCATE`, and destructive schema operations.
 
 ---
